@@ -677,7 +677,9 @@ end
 
 function MMM.FindMarker(continentID, zoneID, markerName)
     if not WorldMapFrame:IsVisible() then ShowUIPanel(WorldMapFrame) end
-    PlaySoundFile("Sound\\Interface\\MapPing.wav")
+    if GetCVar("Sound_EnableSFX") ~= "0" and GetCVar("Sound_MasterVolume") ~= "0" then
+        PlaySoundFile("Sound\\Interface\\MapPing.wav")
+    end
     MMM.pendingHighlight = markerName
     if GetCurrentMapContinent() == continentID and GetCurrentMapZone() == zoneID then
         MMM.ForceRedraw()
