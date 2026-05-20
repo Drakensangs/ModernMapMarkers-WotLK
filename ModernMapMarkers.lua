@@ -110,7 +110,9 @@ end
 function MMM.NavigateToTransportDest(destContinent, destZone, originC, originZ)
     pendingOriginC = originC
     pendingOriginZ = originZ
-    PlaySoundFile("Sound\\Interface\\MapPing.wav")
+    if GetCVar("Sound_EnableSFX") ~= "0" and GetCVar("Sound_MasterVolume") ~= "0" then
+        PlaySoundFile("Sound\\Interface\\MapPing.wav")
+    end
     SetMapZoom(destContinent, destZone)
     MMM.ForceRedraw()
 end
@@ -408,7 +410,9 @@ local function OnWorldBossClick()
     end
 
     if dataID and atlasIndex then
+        if GetCVar("Sound_EnableSFX") ~= "0" and GetCVar("Sound_MasterVolume") ~= "0" then
         PlaySoundFile(SOUND_CLICK)
+		end
         if WorldMapFrame:IsVisible() and IsWorldMapFullscreen() then
             HideUIPanel(WorldMapFrame)
         end
@@ -450,7 +454,9 @@ end
 
 local function OnAtlasClick()
     if this.atlasID and AtlasFrame and AtlasOptions then
+        if GetCVar("Sound_EnableSFX") ~= "0" and GetCVar("Sound_MasterVolume") ~= "0" then
         PlaySoundFile(SOUND_CLICK)
+		end
         local continent = GetCurrentMapContinent()
         local atlasType = ATLAS_CONTINENT_MAP[continent] or 1
         local atlasZone = this.atlasID
@@ -520,7 +526,9 @@ local function OnTransportClick()
 
     local cc = GetCurrentMapContinent()
     local cz = GetCurrentMapZone()
-    PlaySoundFile("Sound\\Interface\\MapPing.wav")
+    if GetCVar("Sound_EnableSFX") ~= "0" and GetCVar("Sound_MasterVolume") ~= "0" then
+        PlaySoundFile("Sound\\Interface\\MapPing.wav")
+	end
 
     -- Same-zone transport: highlight the other pin without navigating.
     if chosen[1] == cc and chosen[2] == cz then
